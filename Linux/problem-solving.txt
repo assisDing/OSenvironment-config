@@ -1,0 +1,333 @@
+#KEYBOARD
+
+    #configurar teclado pt-br
+    $ loadkeys br-abnt2
+    
+    #consertar teclado br
+    $ setxkbmap -layout br -variant abnt2 	
+    
+    #deixar permanente
+    $ echo 'setxkbmap -layout br -variant abnt2' >> ~/.xprofile
+    
+    
+    sudo nano /etc/X11/xorg.conf.d/00-keyboard.conf
+    
+    Section "InputClass"
+    	Identifier "system-keyboard"
+    	MatchIsKeyboard "on"
+    	Option "XkbLayout" "br"
+    	Option "XkbVariant" "abnt2"
+    EndSection
+    
+    ou nmudar /etc/default/keyboard
+    
+    .xprofile
+    .xinitrc
+
+
+
+#touchpad
+    xinput
+    
+    xinput list-props <id of your touchpad>
+    
+    Tapping Enabled (some number) : 0
+    
+    xinput set-prop <id of your touchpad> <number of Tapping Enabled> 1
+
+    
+    pessoal:
+    xinput set-prop 9 341 1
+    
+    trabalho:
+    xinput set-prop 10 339 1
+
+
+
+#INTERNET
+
+    
+
+
+    $ rfkill list 	#verificar se a wifi está bloqueada
+    $ rfkill unblock wifi 	#habilitar wifi
+    
+    
+    #Ligar wifi device e escanear
+	    $ iwctl device wlan0 set-property Powered on
+	    device list	#verificar devices
+	    	station wlan0 scan
+	    	station wlan0 get-networks
+    
+    
+    #Fazer login na wifi
+    station wlan0 connect "wifi id"
+    	or
+    	iwctl --passphrase password station wlan0 connect wifi-id
+		or 
+		nmtui
+    
+        
+    
+    #verifique conexão
+    
+    
+    $ iwctl station wlan0 show
+    $ ping -c 4 archlinux.org
+    
+    #caso ainda nao funcione
+    
+    $ dhcpcd
+    
+  
+
+
+#MISSING FIRMWARE
+
+    $ pacman -Syu linux-firmware
+    ou
+    https://archlinux.org/packages/core/any/linux-firmware/ 
+    //copie o .zst para o pendrive
+    $pacman -U /mnt/pendrive/linux-firmware-*.zst
+
+
+
+
+
+
+
+#criar usb bootavel
+
+    sudo dd if=debian.iso of=/dev/sdX bs=4M status=progress oflag=sync
+
+    or 
+    
+    $ lsblk
+    $ sudo umount /dev/sdb1
+    $ sudo dd if=/caminho/para/sua/imagem.iso of=/dev/sdb bs=4M status=progress
+    $ sync
+    
+
+  
+#segunda tela 
+    https://github.com/rhgndf/ms912x
+    https://www.synaptics.com/products/displaylink-graphics/downloads/ubuntu
+    sudo apt update
+    sudo apt install linux-headers-6.12.43+deb13-amd64
+    sudo dkms install .
+
+    sudo systemctl status displaylink.service                           
+    sudo systemctl start displaylink-driver.service
+
+
+    #remove
+    sudo dkms remove -m ms912x -v 0.1 --all
+    sudo rm -rf /var/lib/dkms/ms912x
+    sudo rm -rf /usr/src/ms912x-0.1
+
+
+#huion no linux
+    git clone https://github.com/DIGImend/digimend-kernel-drivers.git
+    cd digimend-kernel-drivers
+    make
+    sudo make install
+  
+    xsetwacom set "Tablet Monitor stylus" MapToOutput HDMI-1
+    xsetwacom --list devices
+    
+    
+    xsetwacom get "Tablet Monitor stylus" all
+    xsetwacom get "Tablet Monitor pad" all
+
+
+
+
+#criar alias
+    nano ~/.bashrc  
+    alias nome=’comando’  
+    source ~/.bashrc
+
+
+#adicionar database chines
+    sudo apt install ibus-pinyin ibus-libpinyin
+
+
+
+#sensores de calor
+    sudo apt install lm-sensors
+    sudo sensors-detect
+    sensors
+
+
+
+
+#wireshark first use
+    sudo usermod -aG wireshark "username"
+
+
+#edit grub
+   !!verify and add
+
+
+#criar hotspot
+    nmcli dev wifi hotspot ifname wlan0 con-name MyHotspot ssid “ “ pasword ” “
+
+#acesso tela android
+    scrcpy
+
+
+#packet tracer cisco fix error
+    nano /etc/apt/sources.list
+    deb http://ftp.de.debian.org/debian bullseye main
+    sudo apt install libgl1-mesa-glx
+
+
+#evitar desligar a tela
+    xset s off -dpms && xset s noblank
+
+
+#mudar tela bloqueio i3
+      sudo apt-get install i3lock scrot imagemagick xautolock
+      
+      
+              #!/bin/bash
+              
+              # i3lock blurred screen inspired by /u/patopop007 and the blog post
+              # http://plankenau.com/blog/post-10/gaussianlock
+              
+              # Timings are on an Intel i7-2630QM @ 2.00GHz
+              
+              # Dependencies:
+              # imagemagick
+              # i3lock
+              # scrot (optional but default)
+              
+              IMAGE=/tmp/i3lock.png
+              SCREENSHOT="scrot $IMAGE" # 0.46s
+              
+              # Alternate screenshot method with imagemagick. NOTE: it is much slower
+              # SCREENSHOT="import -window root $IMAGE" # 1.35s
+              
+              # Here are some imagemagick blur types
+              # Uncomment one to use, if you have multiple, the last one will be used
+              
+              # All options are here: http://www.imagemagick.org/Usage/blur/#blur_args
+              #BLURTYPE="0x5" # 7.52s
+              #BLURTYPE="0x2" # 4.39s
+              #BLURTYPE="5x2" # 3.80s
+              BLURTYPE="2x8" # 2.90s
+              #BLURTYPE="2x3" # 2.92s
+              
+              # Get the screenshot, add the blur and lock the screen with it
+              $SCREENSHOT
+              convert $IMAGE -blur $BLURTYPE $IMAGE
+              i3lock -i $IMAGE
+              rm $IMAGE
+              nao fazer nada quando fechar a tela
+              sudo nano /etc/systemd/logind.conf
+              
+              HandleLidSwitch=ignore
+              HandleLidSwitchDocked=ignore
+              HandleLidSwitchExternalPower=ignore
+              HandleLidSwitchDocked=ignore
+              
+              
+    sudo systemctl restart systemd-logind             
+    i3-msg reload
+    i3-msg restart
+
+
+
+#Verificar temperaturas
+	ls /sys/class/thermal/
+
+	cat /sys/class/thermal/thermal_zone0/type
+
+	cat /sys/class/thermal/thermal_zone0/temp 
+
+
+#formatar disco
+	sudo fdisk /dev/sda
+
+	g    cria nova tabela de partição GPT (recomendado)
+	n    cria nova partição
+	Enter    aceita os valores padrão de início e tamanho
+	w    salva e sai
+	
+	p    mostra as partições atuais (opcional, só para conferir)
+	d    apaga uma partição (repita até apagar todas)
+	g    cria nova tabela de partição GPT (disco limpo)
+	n    cria nova partição primária
+	Enter    aceita início padrão
+	Enter    usa o tamanho total do disco
+	w    salva e sai
+
+
+	NTFS (para Windows)
+	sudo mkfs.ntfs -f /dev/sda1
+	
+	
+	FAT32 (compatível com TVs/PS2/pendrives)
+	sudo mkfs.vfat -F 32 /dev/sda1
+	
+	
+	exFAT (compatível Linux/Windows)
+	sudo mkfs.exfat /dev/sda1
+
+
+
+#evitar super aquecimento
+	#Desativar modo turbo
+		echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+
+	#Ativar modo turbo
+		echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+
+	#Ative economia
+		echo powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+	#verifique
+		#cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor | sort -u
+
+	#Se quiser voltar a performance maxima
+		echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+
+	#Listar esquemas de performance suportados
+		cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors | sort -u
+
+
+
+
+
+
+#utilitarios
+	midnighmanager command (file manager)
+	btop (system info)
+	flameshot (screen shot)
+	nautilus (visual file manager)
+
+	alsamixer (volume)
+	lxqt-config-brightness
+	
+
+#file converter
+
+#mp4 to vp8
+ffmpeg -i "nemo.mp4" -c:v libvpx -c:a libvorbis "nemo.mkv" //mp4 para mkv usando vp8
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+

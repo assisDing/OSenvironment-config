@@ -1,0 +1,148 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+
+    "workbench.colorCustomizations": {
+
+         // Menu superior (barra de menu)
+        "menubar.selectionBackground": "#003300",
+        "menubar.selectionForeground": "#00FF00",
+        "titleBar.activeBackground": "#000000",
+        "titleBar.activeForeground": "#00FF00",
+        "titleBar.inactiveBackground": "#000000",
+        "titleBar.inactiveForeground": "#006600",
+
+         "editorPane.background": "#000000",
+        "tab.hoverBackground": "#001100",
+        "tab.hoverForeground": "#00FF00",
+        "tab.lastPinnedBorder": "#00FF00"
+
+        // Dropdowns e seções da barra lateral (Explorer, Outline, Timeline)
+        "sideBarSectionHeader.background": "#000000",
+        "sideBarSectionHeader.foreground": "#00FF00",
+        "sideBarSectionHeader.border": "#00FF00",
+
+        // Explorer folders e dropdown flechas verdes
+        "list.dropBackground": "#001a00",
+        "tree.indentGuidesStroke": "#00FF00",
+        "list.deemphasizedForeground": "#009900",
+
+        // Hover da esquerda
+        "list.hoverForeground": "#00FF00",
+        "list.hoverBackground": "#002200",
+
+        // Bordas extras
+        "focusBorder": "#00FF00",
+        "selection.background": "#003300",
+        "editor.background": "#000000",
+        "editor.foreground": "#00FF00",
+        "editorLineNumber.foreground": "#008800",
+        "editorCursor.foreground": "#00FF00",
+        "editor.selectionBackground": "#003300",
+        "editor.inactiveSelectionBackground": "#001a00",
+        "editorIndentGuide.background": "#004400",
+        "editorIndentGuide.activeBackground": "#00aa00",
+        "editor.lineHighlightBackground": "#001100",
+        "editorBracketMatch.background": "#002200",
+        "editorBracketMatch.border": "#00FF00",
+
+        "sideBar.background": "#000000",
+        "sideBar.foreground": "#00FF00",
+        "activityBar.background": "#000000",
+        "activityBar.foreground": "#00FF00",
+        "activityBar.inactiveForeground": "#006600",
+        "activityBar.activeBorder": "#00FF00",
+        "activityBarBadge.background": "#00FF00",
+        "activityBarBadge.foreground": "#000000",
+
+        "statusBar.background": "#000000",
+        "statusBar.foreground": "#00FF00",
+
+        "tab.activeBackground": "#000000",
+        "tab.inactiveBackground": "#000000",
+        "tab.activeForeground": "#00FF00",
+        "tab.inactiveForeground": "#006600",
+        "tab.border": "#00FF00",
+
+        "panel.border": "#00FF00",
+        "editorGroup.border": "#00FF00",
+        "editorGroupHeader.tabsBorder": "#00FF00",
+
+        "dropdown.background": "#000000",
+        "dropdown.border": "#00FF00",
+        "dropdown.foreground": "#00FF00",
+
+        "menu.background": "#000000",
+        "menu.foreground": "#00FF00",
+        "menu.separatorBackground": "#00FF00",
+        "menu.border": "#00FF00",
+
+        "scrollbarSlider.background": "#004400",
+        "scrollbarSlider.hoverBackground": "#008800",
+        "scrollbarSlider.activeBackground": "#00FF00",
+
+        "quickInput.background": "#000000",
+        "quickInput.foreground": "#00FF00",
+        "quickInputList.focusBackground": "#002200",
+        "quickInputList.focusForeground": "#00FF00",
+
+        "terminal.background": "#000000",
+        "terminal.foreground": "#00FF00",
+        "terminalCursor.background": "#00FF00",
+        "terminalCursor.foreground": "#00FF00",
+        "terminal.border": "#00FF00",
+
+        "button.background": "#003300",
+        "button.foreground": "#00FF00",
+        "button.hoverBackground": "#005500",
+
+        "notificationCenterHeader.background": "#000000",
+        "notifications.background": "#000000",
+        "notifications.foreground": "#00FF00",
+        "notificationLink.foreground": "#00FF00",
+
+        "list.activeSelectionBackground": "#002200",
+        "list.activeSelectionForeground": "#00FF00",
+        "list.hoverBackground": "#001100",
+        "list.focusBackground": "#003300",
+        "list.inactiveSelectionBackground": "#001a00",
+        "list.highlightForeground": "#00FF00"
+    },
+
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": ["keyword", "storage", "variable.language"],
+                "settings": {
+                    "foreground": "#00FF00",
+                    "fontStyle": "bold"
+                }
+            },
+            {
+                "scope": ["comment"],
+                "settings": {
+                    "foreground": "#007700",
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": ["string", "constant"],
+                "settings": {
+                    "foreground": "#00CC00"
+                }
+            },
+            {
+                "scope": ["entity.name.function", "support.function"],
+                "settings": {
+                    "foreground": "#00FF88",
+                    "fontStyle": "bold"
+                }
+            },
+            {
+                "scope": ["variable", "parameter"],
+                "settings": {
+                    "foreground": "#22FF22"
+                }
+            }
+        ]
+    }
+}
